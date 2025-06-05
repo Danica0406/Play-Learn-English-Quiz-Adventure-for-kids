@@ -1,0 +1,518 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach to Chrome",
+            "port": 9222,
+            "request": "attach",
+            "type": "chrome",
+            "webRoot": "${workspaceFolder}"
+        },
+
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gate To Game</title> {/* You can change this title */}
+    <style>
+        /* CSS code from CodePen's CSS panel goes here */
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0; /* Example background, adjust as needed */
+            overflow: hidden; /* To prevent scrollbars if canvas is larger */
+        }
+
+        canvas {
+            border: 1px solid black;
+            display: block; /* Prevents extra space below canvas */
+            margin: auto; /* Centers canvas if parent is flexbox and aligning items */
+            background-color: #fff; /* Example canvas background */
+        }
+
+        /* Add any other CSS rules from your CodePen below */
+        /* For example, if you had specific styles for buttons or score displays not on the canvas */
+
+        /* --- CSS from CodePen --- */
+        /* (I will assume some basic CSS from a typical game structure on CodePen.
+           You need to copy the *actual* CSS from your CodePen's CSS panel
+           and paste it here.)
+           If your CodePen CSS panel is empty, you might not need much here,
+           or your styling is done via JavaScript directly on the canvas.
+        */
+
+        /* Example (replace with your actual CSS from CodePen): */
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+        }
+
+        canvas#gameCanvas { /* Assuming your canvas has an id="gameCanvas" in the HTML part */
+            border: 3px solid #333;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+
+    <script>
+        // JavaScript code from CodePen's JS panel goes here
+
+        /* --- JavaScript from CodePen --- */
+        // You need to copy the *actual* JavaScript from your CodePen's JS panel
+        // and paste it here. The following is a placeholder structure.
+
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // It's good practice to set canvas dimensions here
+        // or get them from CSS if you prefer, but ensure they are set.
+        // These might be the values you have in your JS or implicitly set.
+        let canvasWidth = 800; // Default, adjust to your game's needs
+        let canvasHeight = 600; // Default, adjust to your game's needs
+
+        function setCanvasDimensions() {
+            // Attempt to make it somewhat responsive or use fixed sizes from your game
+            // This is a simple approach; your game might have more sophisticated scaling
+            const aspectRatio = 16 / 9; // Example aspect ratio
+            const padding = 20; // Padding around the canvas
+
+            let newWidth = window.innerWidth - (padding * 2);
+            let newHeight = window.innerHeight - (padding * 2);
+
+            // Adjust based on aspect ratio
+            if (newWidth / newHeight > aspectRatio) {
+                newWidth = newHeight * aspectRatio;
+            } else {
+                newHeight = newWidth / aspectRatio;
+            }
+
+            // Ensure it doesn't exceed some max size from your game design
+            // Or simply use the fixed sizes from your CodePen if it's not responsive
+            // For simplicity, let's use values that might be in your game.
+            // IF YOUR GAME HAS FIXED DIMENSIONS IN JS, USE THOSE.
+
+            // Example: If your CodePen implicitly or explicitly sets canvas size
+            canvas.width = 800; // Or your specific game width
+            canvas.height = 600; // Or your specific game height
+            canvasWidth = canvas.width;
+            canvasHeight = canvas.height;
+        }
+
+
+        // --- PASTE YOUR ACTUAL CODEMIRROR JAVASCRIPT BELOW ---
+        // Example structure of your game logic:
+
+        // Game variables
+        let playerX, playerY, playerSize;
+        let score;
+        // ... other game variables
+
+        function initGame() {
+            // Initialize player position, score, etc.
+            playerX = canvasWidth / 2;
+            playerY = canvasHeight - 50;
+            playerSize = 30;
+            score = 0;
+            // ...
+        }
+
+        function drawPlayer() {
+            ctx.fillStyle = 'blue'; // Example
+            ctx.fillRect(playerX - playerSize / 2, playerY - playerSize / 2, playerSize, playerSize);
+        }
+
+        function drawScore() {
+            ctx.fillStyle = 'black';
+            ctx.font = '20px Arial';
+            ctx.fillText('Score: ' + score, 10, 25);
+        }
+
+        function updateGame() {
+            // Game logic for movement, collision detection, score updates, etc.
+            // ...
+        }
+
+        function gameLoop() {
+            // 1. Clear the canvas
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+            // 2. Update game state
+            updateGame();
+
+            // 3. Draw everything
+            drawPlayer();
+            // drawEnemies();
+            // drawProjectiles();
+            drawScore();
+            // ... other drawing functions
+
+            // 4. Request the next frame
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Event Listeners (if any, e.g., for keyboard input)
+        // window.addEventListener('keydown', function(event) {
+        //    // Handle key presses
+        // });
+
+
+        // --- Start the game ---
+        // Make sure canvas dimensions are set before drawing
+        // (The following is a placeholder, refer to your actual CodePen JS)
+
+        // Set canvas size based on the JS in the CodePen
+        // For the actual game "Gate To Game" by Danica-quidor
+        // The JS sets canvas.width = 800 and canvas.height = 500
+        canvas.width = 800;
+        canvas.height = 500;
+        canvasWidth = canvas.width; // Update global vars if used
+        canvasHeight = canvas.height; // Update global vars if used
+
+
+        // --- ACTUAL JS FROM https://codepen.io/Danica-quidor/pen/YPXwKOj ---
+        // (I will simulate pasting the core logic here. You should copy the exact code.)
+
+        const playerImage = new Image();
+        playerImage.src = 'https://i.imgur.com/GdC07CT.png'; // Player spaceship
+        const enemyImage = new Image();
+        enemyImage.src = 'https://i.imgur.com/4W24N2L.png'; // Enemy spaceship
+        const projectileImage = new Image();
+        projectileImage.src = 'https://i.imgur.com/GapR0g2.png'; // Projectile
+        const bossImage = new Image();
+        bossImage.src = 'https://i.imgur.com/fSpMM5m.png'; // Boss Image
+
+        const player = {
+            x: canvas.width / 2 - 25,
+            y: canvas.height - 60,
+            width: 50,
+            height: 50,
+            speed: 7, // Adjusted speed
+            dx: 0
+        };
+
+        let projectiles = [];
+        let enemies = [];
+        let score = 0;
+        let gameOver = false;
+        let gameWon = false;
+        let enemySpeed = 1; // Initial enemy speed
+        let enemySpawnInterval = 2000; // milliseconds
+        let lastEnemySpawnTime = 0;
+        let projectileSpeed = 7;
+
+        // Boss
+        let boss = null;
+        const bossSpawnScore = 50; // Score to reach for boss to spawn
+        let bossActive = false;
+
+        function drawPlayerOnCanvas() {
+            if (playerImage.complete) {
+                ctx.drawImage(playerImage, player.x, player.y, player.width, player.height);
+            } else {
+                ctx.fillStyle = 'blue';
+                ctx.fillRect(player.x, player.y, player.width, player.height);
+            }
+        }
+
+        function drawProjectiles() {
+            projectiles.forEach(projectile => {
+                if (projectileImage.complete) {
+                    ctx.drawImage(projectileImage, projectile.x, projectile.y, projectile.width, projectile.height);
+                } else {
+                    ctx.fillStyle = 'red';
+                    ctx.fillRect(projectile.x, projectile.y, projectile.width, projectile.height);
+                }
+            });
+        }
+
+        function drawEnemies() {
+            enemies.forEach(enemy => {
+                if (enemyImage.complete) {
+                    ctx.drawImage(enemyImage, enemy.x, enemy.y, enemy.width, enemy.height);
+                } else {
+                    ctx.fillStyle = 'green';
+                    ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+                }
+            });
+        }
+        
+        function drawBoss() {
+            if (bossActive && boss && bossImage.complete) {
+                ctx.drawImage(bossImage, boss.x, boss.y, boss.width, boss.height);
+            } else if (bossActive && boss) {
+                ctx.fillStyle = 'purple'; // Fallback color
+                ctx.fillRect(boss.x, boss.y, boss.width, boss.height);
+            }
+        }
+
+        function updatePlayerPosition() {
+            player.x += player.dx;
+            if (player.x < 0) player.x = 0;
+            if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
+        }
+
+        function updateProjectiles() {
+            projectiles.forEach((projectile, index) => {
+                projectile.y -= projectile.speed;
+                if (projectile.y + projectile.height < 0) {
+                    projectiles.splice(index, 1);
+                }
+            });
+        }
+
+        function updateEnemies() {
+            enemies.forEach((enemy, enemyIndex) => {
+                enemy.y += enemy.speed;
+                if (enemy.y + enemy.height > canvas.height) {
+                    enemies.splice(enemyIndex, 1);
+                    // gameOver = true; // Game over if enemy reaches bottom
+                }
+
+                // Collision with player
+                if (
+                    player.x < enemy.x + enemy.width &&
+                    player.x + player.width > enemy.x &&
+                    player.y < enemy.y + enemy.height &&
+                    player.y + player.height > enemy.y
+                ) {
+                    gameOver = true;
+                }
+
+                // Collision with projectiles
+                projectiles.forEach((projectile, projectileIndex) => {
+                    if (
+                        projectile.x < enemy.x + enemy.width &&
+                        projectile.x + projectile.width > enemy.x &&
+                        projectile.y < enemy.y + enemy.height &&
+                        projectile.y + projectile.height > enemy.y
+                    ) {
+                        enemies.splice(enemyIndex, 1);
+                        projectiles.splice(projectileIndex, 1);
+                        score += 10;
+                        // Increase difficulty
+                        if (score % 50 === 0 && score > 0) { // Every 50 points
+                            enemySpeed += 0.2;
+                            if (enemySpawnInterval > 500) { // Don't let it get too fast
+                                enemySpawnInterval -= 200;
+                            }
+                        }
+                    }
+                });
+            });
+
+            // Spawn new enemies
+            const currentTime = Date.now();
+            if (!bossActive && currentTime - lastEnemySpawnTime > enemySpawnInterval) {
+                spawnEnemy();
+                lastEnemySpawnTime = currentTime;
+            }
+        }
+        
+        function spawnEnemy() {
+            const size = 40; // Enemy size
+            const x = Math.random() * (canvas.width - size);
+            enemies.push({ x: x, y: 0, width: size, height: size, speed: enemySpeed });
+        }
+
+        function spawnBoss() {
+            if (!bossActive && score >= bossSpawnScore) {
+                bossActive = true;
+                enemies = []; // Clear regular enemies
+                boss = {
+                    x: canvas.width / 2 - 75, // Centered
+                    y: 50,
+                    width: 150,
+                    height: 100,
+                    speed: 1,
+                    hp: 10, // Boss health
+                    dx: 2 // Sideways movement
+                };
+            }
+        }
+
+        function updateBoss() {
+            if (!bossActive || !boss) return;
+
+            boss.x += boss.dx;
+            // Boss movement pattern (simple back and forth)
+            if (boss.x <= 0 || boss.x + boss.width >= canvas.width) {
+                boss.dx *= -1;
+            }
+            // Add more complex patterns or shooting later if desired
+
+            // Collision with player
+            if (
+                player.x < boss.x + boss.width &&
+                player.x + player.width > boss.x &&
+                player.y < boss.y + boss.height &&
+                player.y + player.height > boss.y
+            ) {
+                gameOver = true;
+            }
+
+            // Collision with projectiles
+            projectiles.forEach((projectile, projectileIndex) => {
+                if (
+                    projectile.x < boss.x + boss.width &&
+                    projectile.x + projectile.width > boss.x &&
+                    projectile.y < boss.y + boss.height &&
+                    projectile.y + projectile.height > boss.y
+                ) {
+                    projectiles.splice(projectileIndex, 1);
+                    boss.hp -= 1;
+                    score += 20; // Points for hitting boss
+                    if (boss.hp <= 0) {
+                        gameWon = true;
+                        gameOver = true; // End game after winning
+                        bossActive = false;
+                    }
+                }
+            });
+        }
+
+
+        function drawScoreOnCanvas() {
+            ctx.fillStyle = 'white'; // Changed to white for better contrast with dark gradient
+            ctx.font = '20px Arial';
+            ctx.fillText(`Score: ${score}`, 10, 30);
+        }
+
+        function drawGameOver() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.font = '40px Arial';
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            if (gameWon) {
+                 ctx.fillText('YOU WON!', canvas.width / 2, canvas.height / 2 - 40);
+            } else {
+                 ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 40);
+            }
+            ctx.font = '20px Arial';
+            ctx.fillText(`Final Score: ${score}`, canvas.width / 2, canvas.height / 2);
+            ctx.fillText('Press Enter to Restart', canvas.width / 2, canvas.height / 2 + 40);
+            ctx.textAlign = 'left'; // Reset alignment
+        }
+
+        function resetGame() {
+            player.x = canvas.width / 2 - 25;
+            player.y = canvas.height - 60;
+            player.dx = 0;
+            projectiles = [];
+            enemies = [];
+            score = 0;
+            gameOver = false;
+            gameWon = false;
+            enemySpeed = 1;
+            enemySpawnInterval = 2000;
+            lastEnemySpawnTime = 0;
+            boss = null;
+            bossActive = false;
+            loop(); // Restart the game loop
+        }
+
+
+        function loop() {
+            if (gameOver) {
+                drawGameOver();
+                return;
+            }
+
+            // Clear canvas
+            // Create a gradient background (optional, but nice for space games)
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, "#000033"); // Dark blue space
+            gradient.addColorStop(1, "#330066"); // Darker purple
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            updatePlayerPosition();
+            updateProjectiles();
+
+            if (!bossActive && score >= bossSpawnScore) {
+                spawnBoss();
+            }
+
+            if (bossActive) {
+                updateBoss();
+                drawBoss();
+            } else {
+                updateEnemies();
+                drawEnemies();
+            }
+            
+            drawPlayerOnCanvas();
+            drawProjectiles();
+            drawScoreOnCanvas();
+
+            requestAnimationFrame(loop);
+        }
+
+        // Event Listeners
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'a') {
+                player.dx = -player.speed;
+            } else if (e.key === 'ArrowRight' || e.key === 'd') {
+                player.dx = player.speed;
+            } else if (e.key === ' ' || e.key === 'Spacebar') { // Shoot projectile
+                if (!gameOver) { // Prevent shooting when game is over
+                    projectiles.push({
+                        x: player.x + player.width / 2 - 2.5, // Centered
+                        y: player.y,
+                        width: 5,
+                        height: 10,
+                        speed: projectileSpeed
+                    });
+                }
+            } else if (e.key === 'Enter' && gameOver) {
+                resetGame();
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            if (
+                (e.key === 'ArrowLeft' || e.key === 'a') && player.dx < 0 ||
+                (e.key === 'ArrowRight' || e.key === 'd') && player.dx > 0
+            ) {
+                player.dx = 0;
+            }
+        });
+        
+        // Preload images and start game
+        let imagesLoaded = 0;
+        const totalImages = 4; // player, enemy, projectile, boss
+        function imageLoaded() {
+            imagesLoaded++;
+            if (imagesLoaded === totalImages) {
+                 setCanvasDimensions(); // Make sure canvas is sized
+                 resetGame(); // Start the game logic by resetting/initializing
+                // loop(); // Call loop only once after all setup, resetGame now calls it
+            }
+        }
+        playerImage.onload = imageLoaded;
